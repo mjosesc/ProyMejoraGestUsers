@@ -1,0 +1,52 @@
+<section>
+    <div class="wrapper-iniciarsesion">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 offset-lg-2 offset-xl-2">
+                <form action="/users/login" method="post" class="formulario-iniciarsesion">
+                    <div class="formulario-cabecera-iniciarsesion">
+                        <div class="d-flex justify-content-between">
+                            <div class="">
+                                <span class="">Iniciar Sesión</span>
+                            </div>
+                            <div class="">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                        <p>Aquí puede iniciar la sesión</p>
+                        {{#if registerCorrectly}}
+                            <p style="color: green">Se ha registrado correctamente! Ahora puede iniciar sesión.</p>
+                        {{/if}}
+                        {{#if usernameError}}
+                            <p style="color: red">El usuario es incorrecto! Intentelo de nuevo.</p>
+                        {{/if}}
+                        {{#if passwordError}}
+                            <p style="color: red">La contraseña es incorrecta! Intentelo de nuevo.</p>
+                        {{/if}}
+                    </div>
+                    <div class="formulario-contenido-iniciarsesion">
+                        <label for="usuario">Nombre de Usuario</label>
+                        <input type="text" placeholder="Introduce tu nombre de usuario" name="usuario" required>
+
+                        <label for="contrasenya">Contraseña</label>
+                        <input type="password" placeholder="Introduce tu contraseña" name="password" required>
+                        <div class="d-flex flex-column align-items-center">
+                            <button type="submit" class="btn btn-success boton-iniciarsesion-login">Iniciar Sesion
+                            </button>
+                            <a href="#" class="contrasenya-olvidada">¿Contraseña olvidada?</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+                <div class="puede-iniciarsesion">
+                    <span class="">O puede registrarse...</span>
+                    <div class="texto">
+                    Al crear una cuenta en GeeksHubs Travels puede ganar fantásticas recompensas!
+                    </div>
+                        <a href="/users/register"><button type="submit" class="btn btn-success boton-iniciarsesion-login">Registrarse
+                        </button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
