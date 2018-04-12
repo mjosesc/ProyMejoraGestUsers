@@ -23,7 +23,7 @@
                                 <th scope="col">Imagen</th>
                                 <th scope="col">Precio</th>
                                 <th scope="col">Activo</th>
-                                <th scope="col">Acciones</th>
+                                <th scope="col">Editar / Eliminar</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -41,9 +41,8 @@
                                         <input type="checkbox" {{#if activo}}checked{{/if}} onclick="redirect('/admins/adminpanel/updateActive/{{id}}')">
                                     </td>
                                     <td class="d-flex justify-content-between">
-                                        <button type="button" class="btn btn-primary"><i class="fas fa-edit"></i>Editar
-                                        </button>
-                                        <a href="/admins/adminpanel/borrar/{{id}}"><button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i>Eliminar
+                                        <button type="button" class="btn btn-primary"><i class="fas fa-edit"></i></button>
+                                        <a href="/admins/adminpanel/borrar/{{id}}"><button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i>
                                         </button></a>
                                     </td>
                                 </tr>
@@ -182,7 +181,7 @@
                                                 <label for="imagen-añadirdestino-adminpanel">Imagen</label>
                                                 <input type="text" class="form-control" id="imagen-añadirdestino-adminpanel" name="imagen" placeholder="Ruta de la imagen..." required>
                                                 <div class="invalid-feedback">
-                                                    Introduce la ruta de la imagen!
+                                                    Introduce la ruta de la imagen
                                                 </div>
                                             </div>
                                             <div class="col-md-6">

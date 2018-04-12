@@ -46,4 +46,28 @@ Users.login = (usuario,cb)=>{
     })
 };
 
+Users.getAllUsers = (cb)=> {
+    if (!conn) return cb("No se ha podido crear la conexion")
+    conn.query('SELECT * FROM cliente', function (err,resultado) {
+        if (err) return cb(err);
+        return cb(null,resultado);
+    })
+};
+
+Users.deleteUsers = (id,cb) => {
+    if (!conn) return cb("No se ha podido crear la conexión")
+    conn.query('DELETE FROM cliente WHERE id=?',id,(error, resultado)=>{
+        if (error) return cb(error)
+        return cb(null,resultado)
+    })
+}
+
+Users.updateUsers = (usuario,cb)=> {
+    if (!conn) return cb ("No se ha podido establecer conexión")
+    conn.query('UPDATE cliente SET ? WHERE id='+usuario.id+'',usuario,function (error,resultado) {
+        if (error) return cb(error)
+        return cb(null,resultado)
+    })
+}
+
 module.exports = Users;
