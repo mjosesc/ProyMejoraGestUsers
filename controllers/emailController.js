@@ -5,6 +5,7 @@ const Email= require('../config/emailConf');
 
 emailController.recover= (req,res,next)=> {
     usersModel.checkMail(req.body.emailRecover,(err,resultado)=>{
+        let hash = encodeURIComponent(resultado[0].hash);
         if (err) next();
         if (resultado == '') {
             req.flash('mailError', 'El email no existe, inténtelo de nuevo')
@@ -16,7 +17,7 @@ emailController.recover= (req,res,next)=> {
                 to: req.body.emailRecover,
                 subject: 'Email de recuperación de contraseña',
                 html: '<p>Estimado/a '+resultado[0].usuario+':<br>Haga click en el enlace para recuperar su contraseña.</p><br>' +
-                '<a href="http://localhost:3000/email/recover/'+resultado[0].hash+'">Recuperar contraseña de Geekshubs travels.</a>'
+                '<a href="http://localhost:3000/email/recover/'+hash+'">Recuperar contraseña de Geekshubs travels.</a>'
             }
             Email.transporter.sendMail(message,(error,info) =>{
                 if (error){
@@ -30,7 +31,8 @@ emailController.recover= (req,res,next)=> {
 }
 
 emailController.checkHash= (req,res,next)=>{
-    usersModel.checkHash(req.params.hash,(error,resultado)=>{
+    let hash = decodeURIComponent(req.params.hash);
+    usersModel.checkHash(hash,(error,resultado)=>{
         if (error) cb(error)
         if (resultado== ''){
             next()
@@ -57,6 +59,5 @@ emailController.changePass =(req,res,next) =>{
     })
 
 }
-
 
 module.exports = emailController;
