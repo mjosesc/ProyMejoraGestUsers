@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var destinationController = require('../controllers/destinationController');
 var userController= require('../controllers/userController');
+var emailController= require('../controllers/emailController');
+
 
 router.get('/adminpanel',function (req,res,next) {
     destinationController.getAllDestinationsAdmin(req,res,next);
@@ -31,5 +33,8 @@ router.get('/userpanel/borrar/:id', function (req, res, next) {
 router.post('/userpanel/editar', function (req,res,next) {
     userController.updateUsers(req,res,next);
 });
+router.get('/userpanel/recuperar/:id', function (req,res,next) {
+
+})
 
 module.exports = router;

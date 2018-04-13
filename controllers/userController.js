@@ -62,7 +62,10 @@ userController.login = function (req, res, next) {
             layout: 'layout',
             registerCorrectly: req.flash('registerCorrectly'),
             usernameError: req.flash('usernameError'),
-            passwordError: req.flash('passwordError')
+            passwordError: req.flash('passwordError'),
+            mailError: req.flash('mailError'),
+            recoverCorrect: req.flash('recoverCorrect'),
+            passwordChanged: req.flash('passwordChanged')
         });
     }
 };

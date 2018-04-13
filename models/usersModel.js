@@ -2,7 +2,6 @@ let conn = require('../connections/mysqlconnection');
 let hash = require('bcrypt-nodejs');
 let Users={};
 
-
 Users.register = (usuario,cb)=>{
     let comprobacion = [1,2,3];
     if (!conn) return cb("No se ha podido crear la conexion");
@@ -63,6 +62,30 @@ Users.deleteUsers = (id,cb) => {
 }
 
 Users.updateUsers = (usuario,cb)=> {
+    if (!conn) return cb ("No se ha podido establecer conexión")
+    conn.query('UPDATE cliente SET ? WHERE id='+usuario.id+'',usuario,function (error,resultado) {
+        if (error) return cb(error)
+        return cb(null,resultado)
+    })
+}
+
+Users.checkMail = (email,cb)=> {
+    if (!conn) return cb ("No se ha podido establecer conexión")
+    conn.query('SELECT * FROM cliente WHERE email=?',email,function (err,resultado) {
+        if (err) return cb(err)
+        return cb(null,resultado)
+    })
+}
+
+Users.checkHash= (hash,cb)=> {
+    if (!conn) return cb ("No se ha podido establecer conexión")
+    conn.query('SELECT * FROM cliente WHERE hash=?',hash,function (err,resultado){
+        if (err) return cb (err)
+        return cb(null,resultado)
+    })
+}
+
+Users.changePass= (usuario,cb)=>{
     if (!conn) return cb ("No se ha podido establecer conexión")
     conn.query('UPDATE cliente SET ? WHERE id='+usuario.id+'',usuario,function (error,resultado) {
         if (error) return cb(error)

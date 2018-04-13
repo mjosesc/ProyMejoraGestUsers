@@ -1,0 +1,33 @@
+<section>
+    <div class="wrapper-registro ">
+        <div class="row fila-formulario-registro">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 offset-lg-2 offset-xl-2">
+                <form action="/email/changePass" method="post" class="formulario-registro">
+                    <div class="formulario-cabecera-registro">
+                        <div class="d-flex justify-content-between">
+                            <div class="">
+                                <span class="">Cambiar contraseña</span>
+                            </div>
+                            <div class="">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                        <p>Aquí puede cambiar su contraseña:</p>
+                        <input type="text" name="id" value="{{id}}" style="display: none">
+                        <div class="d-flex flex-column">
+                        <label for="contrasenya">Contraseña</label>
+                        <input type="password" class="form-control" placeholder="Introduce tu contraseña" id="contrasenya" name="password" required>
+                            <br>
+                        <label for="repetir-contrasenya">Repite tu contraseña</label>
+                        <input type="password" class="form-control" placeholder="Introduce de nuevo tu contraseña" id="repetir-contrasenya" name="repetir-password" required>
+                        </div>
+                        <div class="d-flex flex-column align-items-center">
+                            <button type="submit" class="btn btn-success boton-iniciarsesion-login">Enviar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
