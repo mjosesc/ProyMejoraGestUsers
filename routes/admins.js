@@ -34,7 +34,7 @@ router.post('/userpanel/editar', function (req,res,next) {
     userController.updateUsers(req,res,next);
 });
 router.get('/userpanel/recuperar/:id', function (req,res,next) {
-
+    emailController.recoverAdmin(req,res,next);
 })
 
 module.exports = router;

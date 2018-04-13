@@ -122,7 +122,8 @@ userController.getAllUsers= function (req, res, next) {
                 emailError: req.flash('emailError'),
                 registerCorrectly:req.flash('registerCorrectly'),
                 borrar: req.flash('borrar'),
-                actualizar: req.flash('actualizar')
+                actualizar: req.flash('actualizar'),
+                sendEmailPass: req.flash('sendEmailPass')
             })
         }
         })

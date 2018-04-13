@@ -60,4 +60,30 @@ emailController.changePass =(req,res,next) =>{
 
 }
 
+emailController.recoverAdmin =(req,res,next) =>{
+    usersModel.getUserById(req.params.id,(error,resultado)=>{
+        if (error) next()
+        if (req.session.isAdmin) {
+            let hash = encodeURIComponent(resultado[0].hash);
+                req.flash('sendEmailPass','Se ha enviado un email con su contraseña al usuario')
+                let message= {
+                    to: resultado[0].email,
+                    subject: 'Email de recuperación de contraseña',
+                    html: '<p>Estimado/a '+resultado[0].usuario+':<br>Haga click en el enlace para recuperar su contraseña.</p><br>' +
+                    '<a href="http://localhost:3000/email/recover/'+hash+'">Recuperar contraseña de Geekshubs travels.</a>'
+                }
+                Email.transporter.sendMail(message,(error,info) =>{
+                    if (error){
+                        next()
+                    }
+                    Email.transporter.close();
+                })
+                res.redirect('/admins/userpanel');
+        }
+        else{
+            next()
+        }
+    })
+}
+
 module.exports = emailController;

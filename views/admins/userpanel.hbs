@@ -21,6 +21,9 @@
                     {{#if actualizar}}
                         <div class="alert alert-success">{{actualizar}}</div>
                     {{/if}}
+                    {{#if sendEmailPass}}
+                        <div class="alert alert-success">{{sendEmailPass}}</div>
+                    {{/if}}
                     {{#if clientes.length}}
                         <table class="table tabla-destinos-adminpanel">
                             <thead>

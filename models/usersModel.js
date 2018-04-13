@@ -93,4 +93,12 @@ Users.changePass= (usuario,cb)=>{
     })
 }
 
+Users.getUserById= (id,cb)=>{
+    if (!conn) return cb ("No se ha podido establecer conexión")
+    conn.query('SELECT * FROM cliente WHERE id=?',id,function (error,resultado) {
+        if (error) return cb(error)
+        return cb(null,resultado)
+    })
+}
+
 module.exports = Users;
