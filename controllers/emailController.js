@@ -45,6 +45,7 @@ emailController.checkHash= (req,res,next)=>{
     })
 };
 
+
 emailController.changePass =(req,res,next) =>{
     let hash = bcrypt.hashSync(req.body.password);
     let Usuario = {
@@ -57,6 +58,7 @@ emailController.changePass =(req,res,next) =>{
         req.flash('passwordChanged', 'Su contraseña se ha cambiado correctamente.');
         res.redirect('/users/login')
     })
+
 
 };
 
@@ -97,6 +99,7 @@ emailController.activate = (req,res,next)=>{
         }
 
     })
+
 }
 
 module.exports = emailController;
