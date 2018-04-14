@@ -45,7 +45,6 @@ emailController.checkHash= (req,res,next)=>{
     })
 };
 
-
 emailController.changePass =(req,res,next) =>{
     let hash = bcrypt.hashSync(req.body.password);
     let Usuario = {

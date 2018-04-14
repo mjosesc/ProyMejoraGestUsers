@@ -28,44 +28,35 @@ userController.postRegister = function (req, res, next){
         email : req.body.email,
         password : req.body.password,
         hash : hash,
-<<<<<<< HEAD
         isAdmin: 0,
         active:0
     };
 
-    usersModel.register(usuario,function (err,resultado) {
-        if (err) next();
-=======
-        isAdmin: 0
-    };
 
     usersModel.register(usuario,function (err,resultado) {
-        if (err){
+        if (err) {
             res.status(500).json(err);
-        }else{
-            //
->>>>>>> 936f0497dba612f67e4f4ea6a4a93a626c9508f1
-            switch (resultado){
+        } else {
+            switch (resultado) {
                 case 1:
-                    req.flash('usernameError','El usuario ya existe, inténtelo de nuevo')
+                    req.flash('usernameError', 'El usuario ya existe, inténtelo de nuevo')
                     res.redirect('/users/register');
                     break;
                 case 2:
-                    req.flash('emailError','El email ya existe, inténtelo de nuevo')
+                    req.flash('emailError', 'El email ya existe, inténtelo de nuevo')
                     res.redirect('/users/register');
                     break;
                 case 3:
-<<<<<<< HEAD
-                    req.flash('registerCorrectly','Se ha registrado correctamente, hemos enviado un correo para activar su cuenta!')
+                    req.flash('registerCorrectly', 'Se ha registrado correctamente, hemos enviado un correo para activar su cuenta!')
                     hash = encodeURIComponent(hash);
-                    let message= {
+                    let message = {
                         to: usuario.email,
                         subject: 'Enlace de activación de la cuenta',
-                        html: '<p>Estimado/a '+usuario.usuario+':<br>Haga click en el enlace para activa su cuenta.</p><br>' +
-                        '<a href="http://localhost:3000/email/activate/'+hash+'">Active su cuenta de Geekshubs travels.</a>'
+                        html: '<p>Estimado/a ' + usuario.usuario + ':<br>Haga click en el enlace para activa su cuenta.</p><br>' +
+                        '<a href="http://localhost:3000/email/activate/' + hash + '">Active su cuenta de Geekshubs travels.</a>'
                     }
-                    Email.transporter.sendMail(message,(error,info) =>{
-                        if (error){
+                    Email.transporter.sendMail(message, (error, info) => {
+                        if (error) {
                             next()
                         }
                         Email.transporter.close();
@@ -73,15 +64,10 @@ userController.postRegister = function (req, res, next){
                     res.redirect('/users/login');
                     break;
             }
-=======
-                    req.flash('registerCorrectly','Se ha registrado correctamente, ahora puede iniciar sesión')
-                    res.redirect('/users/login');
-                    break;
-            }
         }
->>>>>>> 936f0497dba612f67e4f4ea6a4a93a626c9508f1
     })
-};
+
+}
 
 userController.login = function (req, res, next) {
     if(req.session.username){
@@ -95,13 +81,9 @@ userController.login = function (req, res, next) {
             passwordError: req.flash('passwordError'),
             mailError: req.flash('mailError'),
             recoverCorrect: req.flash('recoverCorrect'),
-<<<<<<< HEAD
             passwordChanged: req.flash('passwordChanged'),
             noActivo:req.flash('noActivo'),
             activated:req.flash('activated')
-=======
-            passwordChanged: req.flash('passwordChanged')
->>>>>>> 936f0497dba612f67e4f4ea6a4a93a626c9508f1
         });
     }
 };
@@ -112,13 +94,9 @@ userController.postLogin = function (req, res , next) {
         password: req.body.password
     }
     usersModel.login(usuario, function (err, resultado, usuarioRegistrado) {
-<<<<<<< HEAD
-        if (err) next(err);
-=======
         if (err) {
             next(err);
         } else {
->>>>>>> 936f0497dba612f67e4f4ea6a4a93a626c9508f1
             switch (resultado) {
                 case 1:
                     req.flash('usernameError', 'El usuario no existe!')
@@ -129,28 +107,20 @@ userController.postLogin = function (req, res , next) {
                     res.redirect('/users/login');
                     break;
                 case 3:
-<<<<<<< HEAD
-                    if (!usuarioRegistrado.active){
-                        req.flash('noActivo','Su cuenta no esta activa , revisa su correo para activarla!')
+                    if (!usuarioRegistrado.active) {
+                        req.flash('noActivo', 'Su cuenta no esta activa , revisa su correo para activarla!')
                         res.redirect('/users/login');
-                    }else {
+                    } else {
                         req.session.username = usuarioRegistrado.usuario;
                         req.session.isAdmin = usuarioRegistrado.isAdmin;
                         res.redirect('/');
                     }
                     break;
             }
-=======
-                    req.session.username = usuarioRegistrado.usuario;
-                    req.session.isAdmin = usuarioRegistrado.isAdmin;
-                    res.redirect('/');
-                    break;
-            }
-
         }
->>>>>>> 936f0497dba612f67e4f4ea6a4a93a626c9508f1
-    });
-};
+
+    })
+}
 
 userController.logOut= function (req, res, next){
     if(!req.session.username){
