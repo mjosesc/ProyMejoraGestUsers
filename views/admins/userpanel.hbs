@@ -1,0 +1,165 @@
+<section>
+    <div class="wrapper-adminpanel">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-10 offset-1">
+                    {{#if usernameError}}
+                        <div class="alert alert-warning">{{usernameError}}</div>
+                    {{/if}}
+                    {{#if emailError}}
+                        <div class="alert alert-warning">{{emailError}}</div>
+                    {{/if}}
+                    {{#if registerCorrectly}}
+                        <div class="alert alert-success">{{registerCorrectly}}</div>
+                    {{/if}}
+                    {{#if añadir}}
+                        <div class="alert alert-success">{{añadir}}</div>
+                    {{/if}}
+                    {{#if borrar}}
+                        <div class="alert alert-success">{{borrar}}</div>
+                    {{/if}}
+                    {{#if actualizar}}
+                        <div class="alert alert-success">{{actualizar}}</div>
+                    {{/if}}
+                    {{#if sendEmailPass}}
+                        <div class="alert alert-success">{{sendEmailPass}}</div>
+                    {{/if}}
+                    {{#if clientes.length}}
+                        <table class="table tabla-destinos-adminpanel">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Usuario</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">IsAdmin</th>
+                                <th scope="col">Activo</th>
+                                <th scope="col">Editar /   Eliminar /   Recuperar Contraseña</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {{#each clientes}}
+                                <tr>
+                                    <th scope="row">{{id}}</th>
+                                    <td>{{usuario}}</td>
+                                    <td>{{email}}</td>
+                                    <td><input type="checkbox" {{#if isAdmin}}checked{{/if}} disabled></td>
+                                    <td><input type="checkbox" {{#if active}}checked{{/if}} disabled></td>
+                                    <td class="d-flex justify-content-between">
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editarUsuario{{id}}"><i class="fas fa-edit"></i>
+                                        </button>
+                                        <a href="/admins/userpanel/borrar/{{id}}"><button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i>
+                                        </button></a>
+                                        <a href="/admins/userpanel/recuperar/{{id}}"><button type="button" class="btn btn-danger"><i class="fas fa-envelope"></i>
+                                        </button></a>
+                                    </td>
+                                </tr>
+                            {{/each}}
+                            <tr>
+                                <td>
+                                    <button type="button" class="btn btn-outline-secondary" data-toggle="modal"
+                                            data-target="#añadirUsuario"><i class="fas fa-user"></i>Añadir usuario
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    {{/if}}
+                    {{#if clientes}}
+                    {{#each clientes}}
+                    <!-- Modal -->
+                    <div class="modal fade" id="editarUsuario{{id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <form action="/admins/userpanel/editar" method="post">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-user"></i> Añadir usuario</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="text" name="id" value="{{id}}" style="display: none">
+                                    <div class="d-flex flex-row">
+                                        <div class="col-9">
+                                            <label for="usuario">Usuario</label>
+                                            <input type="text" class="form-control" name="usuario" value="{{usuario}}" required="required">
+                                        </div>
+                                        <div class="col-3">
+                                            <label for="admin">Admin</label>
+                                            <input type="checkbox" class="form-control" name="isAdmin" {{#if isAdmin}}checked{{/if}}>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row">
+                                        <div class="col-9">
+                                            <label for="email">Email</label>
+                                            <input type="email" class="form-control" name="email" value="{{email}}" required="required">
+                                        </div>
+                                        <div class="col-3">
+                                            <label for="activo">Activo</label>
+                                            <input type="checkbox" class="form-control" name="active" {{#if active}}checked{{/if}}>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                    {{/each}}
+                    {{/if}}
+                    <!-- Modal -->
+                    <div class="modal fade" id="añadirUsuario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <form action="/admins/userpanel/create" method="post">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-user"></i> Añadir usuario</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="d-flex flex-row">
+                                            <div class="col-9">
+                                                <label for="usuario">Usuario</label>
+                                                <input type="text" class="form-control" name="usuario" required="required">
+                                            </div>
+                                            <div class="col-3">
+                                                <label for="activo">Activo</label>
+                                                <input type="checkbox" class="form-control" name="active">
+                                            </div>
+                                        </div>
+                                        <div class="d-flex flex-row">
+                                            <div class="col-9">
+                                                <label for="password">Contraseña</label>
+                                                <input type="password" class="form-control" name="password" required="required">
+                                            </div>
+                                            <div class="col-3">
+                                                <label for="Admin">Admin</label>
+                                                <input type="checkbox" class="form-control" name="isAdmin" >
+                                            </div>
+                                        </div>
+                                            <div class="d-flex flex-row">
+                                                <div class="col-12">
+                                                    <label for="email">Email</label>
+                                                    <input type="email" class="form-control" name="email" required="required">
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                        <button type="submit" class="btn btn-primary">Guardar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
